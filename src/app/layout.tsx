@@ -16,7 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html data-theme="cupcake" lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="min-h-screen flex flex-col max-w-6xl bg-base-200 mx-auto px-4 py-6">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
