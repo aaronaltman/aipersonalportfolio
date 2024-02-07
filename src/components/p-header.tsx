@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function PrimaryHeader() {
@@ -14,7 +15,7 @@ export default function PrimaryHeader() {
         />
         <ul className="menu menu-vertical lg:menu-horizontal bg-neutral text-primary text-lg rounded-box">
           <li>
-            <a>About AKA</a>
+            <Link href="/about">About AKA</Link>
           </li>
           <li>
             <a>Projects</a>
