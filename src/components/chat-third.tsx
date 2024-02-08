@@ -1,20 +1,21 @@
 "use client";
 
-import React, { useEffect, useRef } from "react"; // Import useRef and useEffect
+import React, { useEffect, useRef, useState } from "react"; // Import useState
 import { useChat } from "ai/react";
 
 export default function ChatThird() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
-  const messagesEndRef = useRef(null); // Create a ref for the end of the messages container
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    // Scroll to the bottom of the chat container every time messages update
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]); // Dependency array, ensures effect runs whenever `messages` changes
+  }, [messages]);
+
+  // Function to format timestamp, you might need to adjust based on your actual date value
 
   return (
     <div className="flex flex-col mx-auto">
-      <div className="container overflow-y-auto max-h-96">
+      <div className="container max-w-md overflow-y-auto max-h-96">
         {messages.map((message, index) => (
           <div
             key={index}
@@ -24,20 +25,22 @@ export default function ChatThird() {
           >
             <div className="chat-header">
               {message.role === "user" ? "You" : "AI"}
-              <time className="text-xs opacity-50">{/* Time here */}</time>
             </div>
-            <div className="chat-bubble">{message.content}</div>
+            <div className="chat-bubble">
+              {message.content
+                ? message.content
+                : "Placeholder text for empty message"}
+            </div>
           </div>
         ))}
-        <div ref={messagesEndRef} />{" "}
-        {/* Invisible div at the end of messages */}
+        <div ref={messagesEndRef} />
       </div>
       <div className="flex justify-center items-center w-full px-3 py-10">
         <form onSubmit={handleSubmit} className="w-full">
           <input
-            className="w-full p-2 mb-2 border border-gray-300 rounded shadow-xl"
+            className="w-full p-2 mb-2 input rounded shadow-xl"
             value={input}
-            placeholder="Say something..."
+            placeholder="I am an AI Chatbot"
             onChange={handleInputChange}
           />
         </form>
